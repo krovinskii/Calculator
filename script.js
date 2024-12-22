@@ -112,7 +112,7 @@ const pressTwo = two.addEventListener("click", () => {
 const pressThree = three.addEventListener("click", () => {
     output.innerText = 3;
     runningTotal += 3;
-    if (uoutput.value === percent || divide || multiply || minus || plus) {
+    if (output.value === percent || divide || multiply || minus || plus) {
         userInput2 += 3;
         console.log(`userInput2: ${userInput2}`);
     }
@@ -146,3 +146,10 @@ const subtraction = (userInput1, userInput2) => userInput1 - userInput2;
 const percentage = (userInput1, userInput2) => (100 * userInput1) / userInput2;
 const allowNegativeInput = () => {}; //do I need this at all? 
 
+
+
+/* Currently I need to assign a variable to log the type of math selected. Then later, in the = function, I need to check which math function was selected and run it with the correct inputs. 
+1. assign math selector variable
+2. loop through looking for which was selected,
+3. push values,
+4. return total */ 
