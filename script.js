@@ -4,7 +4,7 @@ const output = document.getElementById("output");
 const clear = document.getElementById("AC");
 const negativeToggle = document.getElementById("plusminusdiv");
 const percent = document.getElementById("percent");
-const divide = document.getElementById("divice");
+const divide = document.getElementById("divide");
 const seven = document.getElementById("7");
 const eight = document.getElementById("8");
 const nine = document.getElementById("9");
@@ -26,6 +26,8 @@ let firstInput = [];
 let userInput1 = [];
 let userInput2 = [];
 let runningTotal = `${userInput1} `;
+let mathOperator = "";
+let result = "";
 
 //event listeners will go below here .. need event listener on every button => add to output
 //value and add to runningTotal 
@@ -35,100 +37,182 @@ let runningTotal = `${userInput1} `;
 const clearAll = clear.addEventListener("click", () => {
     output.innerText = "";
     runningTotal = 0;
+    userInput1 = 0;
+    userInput2 = 0;
+    mathOperator = "";
     console.log(`AC has been pressed. runningTotal = ${runningTotal} output.innerText = ${output.innerText}`);
+    
 
 });
 const pressSeven = seven.addEventListener("click", () => {
     output.innerText = 7;
     runningTotal += 7;
     console.log(`runningTotal: ${runningTotal}`);
-    if (output.value === percent || divide || multiply || minus || plus) {
-        userInput2 += 7;
-        console.log(`userInput2: ${userInput2}`);
+    
+    if (mathOperator !== "") {
+      userInput2 += 7;
+      console.log(`userInput2: ${userInput2}`);
+    } else {
+      userInput1 += 7;
+      console.log(`userInput1: ${userInput1}`);
     }
 });
+
 const pressEight = eight.addEventListener("click", () => {
     output.innerText = 8;
     runningTotal += 8;
-    if (output.value === percent || divide || multiply || minus || plus) {
-        userInput2 += 8;
-        console.log(`userInput2: ${userInput2}`);
+    console.log(`runningTotal: ${runningTotal}`);
+    
+    if (mathOperator !== "") {
+      userInput2 += 8;
+      console.log(`userInput2: ${userInput2}`);
+    } else {
+      userInput1 += 8;
+      console.log(`userInput1: ${userInput1}`);
     }
 });
+
 const pressNine = nine.addEventListener("click", () => {
     output.innerText = 9;
     runningTotal += 9;
-    if (output.value === percent || divide || multiply || minus || plus) {
-        userInput2 += 9;
-        console.log(`userInput2: ${userInput2}`);
+    console.log(`runningTotal: ${runningTotal}`);
+    
+    if (mathOperator !== "") {
+      userInput2 += 9;
+      console.log(`userInput2: ${userInput2}`);
+    } else {
+      userInput1 += 9;
+      console.log(`userInput1: ${userInput1}`);
     }
 });
-const pressMultiply = multiply.addEventListener("click", () => {
 
-});
 const pressFour = four.addEventListener("click", () => {
     output.innerText = 4;
     runningTotal += 4;
-    if (output.value === percent || divide || multiply || minus || plus) {
-        userInput2 += 4;
-        console.log(`userInput2: ${userInput2}`);
+    console.log(`runningTotal: ${runningTotal}`);
+    
+    if (mathOperator !== "") {
+      userInput2 += 4;
+      console.log(`userInput2: ${userInput2}`);
+    } else {
+      userInput1 += 4;
+      console.log(`userInput1: ${userInput1}`);
     }
 });
+
 const pressFive = five.addEventListener("click", () => {
     output.innerText = 5;
     runningTotal += 5;
-    if (output.value === percent || divide || multiply || minus || plus) {
-        userInput2 += 5;
-        console.log(`userInput2: ${userInput2}`);
+    console.log(`runningTotal: ${runningTotal}`);
+    
+    if (mathOperator !== "") {
+      userInput2 += 5;
+      console.log(`userInput2: ${userInput2}`);
+    } else {
+      userInput1 += 5;
+      console.log(`userInput1: ${userInput1}`);
     }
 });
+
 const pressSix = six.addEventListener("click", () => {
     output.innerText = 6;
     runningTotal += 6;
-    if (output.value === percent || divide || multiply || minus || plus) {
-        userInput2 += 6;
-        console.log(`userInput2: ${userInput2}`);
+    console.log(`runningTotal: ${runningTotal}`);
+    
+    if (mathOperator !== "") {
+      userInput2 += 6;
+      console.log(`userInput2: ${userInput2}`);
+    } else {
+      userInput1 += 6;
+      console.log(`userInput1: ${userInput1}`);
     }
 });
-const pressMinus = minus.addEventListener("click", () => {
 
-});
 const pressOne = one.addEventListener("click", () => {
     output.innerText = 1;
     runningTotal += 1;
-    if (output.value === percent || divide || multiply || minus || plus) {
-        userInput2 += 1;
-        console.log(`userInput2: ${userInput2}`);
+    console.log(`runningTotal: ${runningTotal}`);
+    
+    if (mathOperator !== "") {
+      userInput2 += 1;
+      console.log(`userInput2: ${userInput2}`);
+    } else {
+      userInput1 += 1;
+      console.log(`userInput1: ${userInput1}`);
     }
 });
+
 const pressTwo = two.addEventListener("click", () => {
     output.innerText = 2;
     runningTotal += 2;
-    if (output.value === percent || divide || multiply || minus || plus) {
-        userInput2 += 2;
-        console.log(`userInput2: ${userInput2}`);
+    console.log(`runningTotal: ${runningTotal}`);
+    
+    if (mathOperator !== "") {
+      userInput2 += 2;
+      console.log(`userInput2: ${userInput2}`);
+    } else {
+      userInput1 += 2;
+      console.log(`userInput1: ${userInput1}`);
     }
 });
+
 const pressThree = three.addEventListener("click", () => {
     output.innerText = 3;
     runningTotal += 3;
-    if (output.value === percent || divide || multiply || minus || plus) {
-        userInput2 += 3;
-        console.log(`userInput2: ${userInput2}`);
+    console.log(`runningTotal: ${runningTotal}`);
+    
+    if (mathOperator !== "") {
+      userInput2 += 3;
+      console.log(`userInput2: ${userInput2}`);
+    } else {
+      userInput1 += 3;
+      console.log(`userInput1: ${userInput1}`);
     }
 });
 const pressPlus = plus.addEventListener("click", () => {
     output.innerText = "+";
-    runningTotal.push(`${addition()}`)
-    
-
+     mathOperator = "+";
+     console.log(`${userInput1} + `)
+});
+const pressMultiply = multiply.addEventListener("click", () => {
+    output.innerText = "*";
+     mathOperator = "*";
+     console.log(`${userInput1} * `)
+});
+const pressMinus = minus.addEventListener("click", () => {
+    output.innerText = "-";
+     mathOperator = "-";
+     console.log(`${userInput1} - `)
+});
+const pressDivide = divide.addEventListener("click", () => {
+    output.innerText = "/";
+     mathOperator = "/";
+     console.log(`${userInput1} / `)
 });
 const pressDecimal = point.addEventListener("click", () => {
 
 });
 const run = equal.addEventListener("click", () => {
-    output.innerText = runningTotal; //set the output to the hidden running total
-    console.log(`= has been pressed. runningTotal = ${runningTotal} output.innerText = ${output.innerText}`);
+    switch(mathOperator) {
+        case "+":
+            result = Number(userInput1) + Number(userInput2);
+            console.log(`${userInput1} plus ${userInput2} equals ${result}`);
+            break;
+        case "-":
+            result = Number(userInput1) - Number(userInput2);
+            console.log(`${userInput1} minus ${userInput2} equals ${result}`);
+            break;
+        case "*":
+            result = Number(userInput1) * Number(userInput2);
+            console.log(`${userInput1} times ${userInput2} equals ${result}`);
+            break;
+        case "/":
+            result = Number(userInput1) / Number(userInput2);
+            console.log(`${userInput1} divided by ${userInput2} equals ${result}`)
+            break;
+    }
+    
+    output.innerText = result.toFixed(2);
 });
 
 
@@ -138,7 +222,9 @@ const run = equal.addEventListener("click", () => {
 
 
 
-// functions 
+
+
+// functions UNNECESSARY??
 const addition = (userInput1, userInput2) =>  userInput1 + userInput2;
 const multiplication = (userInput1, userInput2) => userInput1 * userInput2;
 const division = (userInput1, userInput2) => userInput1 / userInput2;
@@ -148,8 +234,6 @@ const allowNegativeInput = () => {}; //do I need this at all?
 
 
 
-/* Currently I need to assign a variable to log the type of math selected. Then later, in the = function, I need to check which math function was selected and run it with the correct inputs. 
-1. assign math selector variable
-2. loop through looking for which was selected,
-3. push values,
-4. return total */ 
+/* 
+Calc is adding two numbers if they are pressed before an operator.. 
+*/ 
