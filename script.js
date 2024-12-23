@@ -52,7 +52,15 @@ const pressSeven = seven.addEventListener("click", () => {
     if (mathOperator !== "") {
       userInput2 += 7;
       console.log(`userInput2: ${userInput2}`);
-    } else {
+    }
+    else if (!isNaN(userInput1)) {
+      userInput1.toString;
+      userInput1 += 7;
+      console.log(`userInput1: ${userInput1}`);
+      return parseInt(userInput1);
+      
+    } 
+    else {
       userInput1 += 7;
       console.log(`userInput1: ${userInput1}`);
     }
@@ -66,7 +74,15 @@ const pressEight = eight.addEventListener("click", () => {
     if (mathOperator !== "") {
       userInput2 += 8;
       console.log(`userInput2: ${userInput2}`);
-    } else {
+    }
+    else if (!isNaN(userInput1)) {
+      userInput1.toString;
+      userInput1 += 8;
+      console.log(`userInput1: ${userInput1}`);
+      return parseInt(userInput1);
+      
+    }
+    else {
       userInput1 += 8;
       console.log(`userInput1: ${userInput1}`);
     }
@@ -80,7 +96,15 @@ const pressNine = nine.addEventListener("click", () => {
     if (mathOperator !== "") {
       userInput2 += 9;
       console.log(`userInput2: ${userInput2}`);
-    } else {
+    }
+    else if (!isNaN(userInput1)) {
+      userInput1.toString;
+      userInput1 += 9;
+      console.log(`userInput1: ${userInput1}`);
+      return parseInt(userInput1);
+      
+    } 
+    else {
       userInput1 += 9;
       console.log(`userInput1: ${userInput1}`);
     }
@@ -94,7 +118,15 @@ const pressFour = four.addEventListener("click", () => {
     if (mathOperator !== "") {
       userInput2 += 4;
       console.log(`userInput2: ${userInput2}`);
-    } else {
+    }
+    else if (!isNaN(userInput1)) {
+      userInput1.toString;
+      userInput1 += 4;
+      console.log(`userInput1: ${userInput1}`);
+      return parseInt(userInput1);
+      
+    }  
+    else {
       userInput1 += 4;
       console.log(`userInput1: ${userInput1}`);
     }
@@ -108,7 +140,15 @@ const pressFive = five.addEventListener("click", () => {
     if (mathOperator !== "") {
       userInput2 += 5;
       console.log(`userInput2: ${userInput2}`);
-    } else {
+    } 
+    else if (!isNaN(userInput1)) {
+      userInput1.toString;
+      userInput1 += 5;
+      console.log(`userInput1: ${userInput1}`);
+      return parseInt(userInput1);
+      
+    } 
+    else {
       userInput1 += 5;
       console.log(`userInput1: ${userInput1}`);
     }
@@ -122,6 +162,13 @@ const pressSix = six.addEventListener("click", () => {
     if (mathOperator !== "") {
       userInput2 += 6;
       console.log(`userInput2: ${userInput2}`);
+    } 
+    else if (!isNaN(userInput1)) {
+      userInput1.toString;
+      userInput1 += 6;
+      console.log(`userInput1: ${userInput1}`);
+      return parseInt(userInput1);
+      
     } else {
       userInput1 += 6;
       console.log(`userInput1: ${userInput1}`);
@@ -136,7 +183,15 @@ const pressOne = one.addEventListener("click", () => {
     if (mathOperator !== "") {
       userInput2 += 1;
       console.log(`userInput2: ${userInput2}`);
-    } else {
+    }
+    else if (!isNaN(userInput1)) {
+      userInput1.toString;
+      userInput1 += 1;
+      console.log(`userInput1: ${userInput1}`);
+      return parseInt(userInput1);
+      
+    }  
+    else {
       userInput1 += 1;
       console.log(`userInput1: ${userInput1}`);
     }
@@ -150,7 +205,15 @@ const pressTwo = two.addEventListener("click", () => {
     if (mathOperator !== "") {
       userInput2 += 2;
       console.log(`userInput2: ${userInput2}`);
-    } else {
+    } 
+    else if (!isNaN(userInput1)) {
+      userInput1.toString;
+      userInput1 += 2;
+      console.log(`userInput1: ${userInput1}`);
+      return parseInt(userInput1);
+      
+    } 
+    else {
       userInput1 += 2;
       console.log(`userInput1: ${userInput1}`);
     }
@@ -164,7 +227,15 @@ const pressThree = three.addEventListener("click", () => {
     if (mathOperator !== "") {
       userInput2 += 3;
       console.log(`userInput2: ${userInput2}`);
-    } else {
+    } 
+    else if (!isNaN(userInput1)) {
+      userInput1.toString;
+      userInput1 += 3;
+      console.log(`userInput1: ${userInput1}`);
+      return parseInt(userInput1);
+      
+    } 
+    else {
       userInput1 += 3;
       console.log(`userInput1: ${userInput1}`);
     }
@@ -237,3 +308,5 @@ const allowNegativeInput = () => {}; //do I need this at all?
 /* 
 Calc is adding two numbers if they are pressed before an operator.. 
 */ 
+
+
