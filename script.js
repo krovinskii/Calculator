@@ -1,312 +1,143 @@
-//ID's from index, all buttons
-
 const output = document.getElementById("output");
 const clear = document.getElementById("AC");
 const negativeToggle = document.getElementById("plusminusdiv");
-const percent = document.getElementById("percent");
-const divide = document.getElementById("divide");
-const seven = document.getElementById("7");
-const eight = document.getElementById("8");
-const nine = document.getElementById("9");
-const multiply = document.getElementById("x");
-const four = document.getElementById("4");
-const five = document.getElementById("5");
-const six = document.getElementById("6");
-const minus = document.getElementById("-");
-const one = document.getElementById("1");
-const two = document.getElementById("2");
-const three = document.getElementById("3");
-const plus = document.getElementById("+");
-const zero = document.getElementById("0");
-const point = document.getElementById(".");
-const equal = document.getElementById("=");
+const numbers = {
+    zero: document.getElementById("zero"),
+    one: document.getElementById("1"),
+    two: document.getElementById("2"),
+    three: document.getElementById("3"),
+    four: document.getElementById("4"),
+    five: document.getElementById("5"),
+    six: document.getElementById("6"),
+    seven: document.getElementById("7"),
+    eight: document.getElementById("8"),
+    nine: document.getElementById("9")
+};
+const operators = {
+    plus: document.getElementById("+"),
+    minus: document.getElementById("-"),
+    multiply: document.getElementById("x"),
+    divide: document.getElementById("divide"),
+    equals: document.getElementById("="),
+    point: document.getElementById(".")
+};
 
+let currentNumber = '';    
+let storedNumber = null;   
+let lastOperator = null;   
+let displayValue = '';     
 
-let firstInput = [];
-let userInput1 = [];
-let userInput2 = [];
-let runningTotal = `${userInput1} `;
-let mathOperator = "";
-let result = "";
+const handleNumberPress = (number) => {
+  currentNumber += number;
+  displayValue = currentNumber;
+  output.innerText = displayValue;
+  scaleOutput(); 
+  console.log(`Current number: ${currentNumber}`);
+};
 
-//event listeners will go below here .. need event listener on every button => add to output
-//value and add to runningTotal 
-//need isPreviousInput to check if theres a previous input, if so add the new input as 
-// userInput 2. if there is no previous, then assign as userInput 1.
-
-const clearAll = clear.addEventListener("click", () => {
-    output.innerText = "";
-    runningTotal = 0;
-    userInput1 = 0;
-    userInput2 = 0;
-    mathOperator = "";
-    console.log(`AC has been pressed. runningTotal = ${runningTotal} output.innerText = ${output.innerText}`);
+const calculate = (a, operator, b) => {
+    const num1 = parseFloat(a);
+    const num2 = parseFloat(b);
     
-
-});
-const pressSeven = seven.addEventListener("click", () => {
-    output.innerText = 7;
-    runningTotal += 7;
-    console.log(`runningTotal: ${runningTotal}`);
-    
-    if (mathOperator !== "") {
-      userInput2 += 7;
-      console.log(`userInput2: ${userInput2}`);
+    switch(operator) {
+        case '+': return num1 + num2;
+        case '-': return num1 - num2;
+        case '*': return num1 * num2;
+        case '/': return num2 !== 0 ? num1 / num2 : 'Error';
+        default: return b;
     }
-    else if (!isNaN(userInput1)) {
-      userInput1.toString;
-      userInput1 += 7;
-      console.log(`userInput1: ${userInput1}`);
-      return parseInt(userInput1);
-      
+};
+
+const handleOperatorPress = (operator) => {
+    if (storedNumber !== null && lastOperator !== null && currentNumber !== '') {
+        storedNumber = calculate(storedNumber, lastOperator, currentNumber);
+        output.innerText = storedNumber;
     } 
-    else {
-      userInput1 += 7;
-      console.log(`userInput1: ${userInput1}`);
+ 
+    else if (currentNumber !== '') {
+        storedNumber = currentNumber;
     }
-});
 
-const pressEight = eight.addEventListener("click", () => {
-    output.innerText = 8;
-    runningTotal += 8;
-    console.log(`runningTotal: ${runningTotal}`);
+    lastOperator = operator === 'x' ? '*' : operator;
+    currentNumber = '';
     
-    if (mathOperator !== "") {
-      userInput2 += 8;
-      console.log(`userInput2: ${userInput2}`);
-    }
-    else if (!isNaN(userInput1)) {
-      userInput1.toString;
-      userInput1 += 8;
-      console.log(`userInput1: ${userInput1}`);
-      return parseInt(userInput1);
-      
-    }
-    else {
-      userInput1 += 8;
-      console.log(`userInput1: ${userInput1}`);
-    }
-});
+    console.log(`Stored: ${storedNumber}, Operator: ${lastOperator}`);
+};
 
-const pressNine = nine.addEventListener("click", () => {
-    output.innerText = 9;
-    runningTotal += 9;
-    console.log(`runningTotal: ${runningTotal}`);
-    
-    if (mathOperator !== "") {
-      userInput2 += 9;
-      console.log(`userInput2: ${userInput2}`);
-    }
-    else if (!isNaN(userInput1)) {
-      userInput1.toString;
-      userInput1 += 9;
-      console.log(`userInput1: ${userInput1}`);
-      return parseInt(userInput1);
-      
-    } 
-    else {
-      userInput1 += 9;
-      console.log(`userInput1: ${userInput1}`);
-    }
-});
+const handleEquals = () => {
+  if (storedNumber === null || lastOperator === null || currentNumber === '') {
+      return;
+  }
 
-const pressFour = four.addEventListener("click", () => {
-    output.innerText = 4;
-    runningTotal += 4;
-    console.log(`runningTotal: ${runningTotal}`);
-    
-    if (mathOperator !== "") {
-      userInput2 += 4;
-      console.log(`userInput2: ${userInput2}`);
-    }
-    else if (!isNaN(userInput1)) {
-      userInput1.toString;
-      userInput1 += 4;
-      console.log(`userInput1: ${userInput1}`);
-      return parseInt(userInput1);
-      
-    }  
-    else {
-      userInput1 += 4;
-      console.log(`userInput1: ${userInput1}`);
-    }
-});
+  const result = calculate(storedNumber, lastOperator, currentNumber);
+  output.innerText = typeof result === 'number' ? result.toFixed(2) : result;
+  scaleOutput(); 
+  
+  storedNumber = result;
+  currentNumber = '';
+  lastOperator = null;
+  
+  console.log(`Result: ${result}`);
+};
 
-const pressFive = five.addEventListener("click", () => {
-    output.innerText = 5;
-    runningTotal += 5;
-    console.log(`runningTotal: ${runningTotal}`);
-    
-    if (mathOperator !== "") {
-      userInput2 += 5;
-      console.log(`userInput2: ${userInput2}`);
-    } 
-    else if (!isNaN(userInput1)) {
-      userInput1.toString;
-      userInput1 += 5;
-      console.log(`userInput1: ${userInput1}`);
-      return parseInt(userInput1);
-      
-    } 
-    else {
-      userInput1 += 5;
-      console.log(`userInput1: ${userInput1}`);
-    }
-});
+const clearCalculator = () => {
+  currentNumber = '';
+  storedNumber = null;
+  lastOperator = null;
+  output.innerText = '0';
+  output.style.fontSize = '100px'; 
+  console.log('Calculator cleared');
+};
 
-const pressSix = six.addEventListener("click", () => {
-    output.innerText = 6;
-    runningTotal += 6;
-    console.log(`runningTotal: ${runningTotal}`);
-    
-    if (mathOperator !== "") {
-      userInput2 += 6;
-      console.log(`userInput2: ${userInput2}`);
-    } 
-    else if (!isNaN(userInput1)) {
-      userInput1.toString;
-      userInput1 += 6;
-      console.log(`userInput1: ${userInput1}`);
-      return parseInt(userInput1);
-      
-    } else {
-      userInput1 += 6;
-      console.log(`userInput1: ${userInput1}`);
-    }
-});
+const handleNegativeToggle = () => {
+  if (currentNumber !== '') {
+      currentNumber = currentNumber.startsWith('-') ? 
+          currentNumber.slice(1) : 
+          '-' + currentNumber;
+      output.innerText = currentNumber;
+      scaleOutput(); 
+  } else if (storedNumber !== null) {
+      storedNumber = -storedNumber;
+      output.innerText = storedNumber;
+      scaleOutput(); 
+  }
+  
+  console.log(`Number toggled: ${currentNumber || storedNumber}`);
+};
 
-const pressOne = one.addEventListener("click", () => {
-    output.innerText = 1;
-    runningTotal += 1;
-    console.log(`runningTotal: ${runningTotal}`);
-    
-    if (mathOperator !== "") {
-      userInput2 += 1;
-      console.log(`userInput2: ${userInput2}`);
-    }
-    else if (!isNaN(userInput1)) {
-      userInput1.toString;
-      userInput1 += 1;
-      console.log(`userInput1: ${userInput1}`);
-      return parseInt(userInput1);
-      
-    }  
-    else {
-      userInput1 += 1;
-      console.log(`userInput1: ${userInput1}`);
-    }
-});
+const scaleOutput = () => {
+  const outputText = output.innerText;
+  const baseSize = 100; 
+  
+  if (outputText.length > 8) {
+      const newSize = baseSize * (8 / outputText.length);
+      output.style.fontSize = `${newSize}px`;
+  } else {
+      output.style.fontSize = `${baseSize}px`;
+  }
+};
 
-const pressTwo = two.addEventListener("click", () => {
-    output.innerText = 2;
-    runningTotal += 2;
-    console.log(`runningTotal: ${runningTotal}`);
-    
-    if (mathOperator !== "") {
-      userInput2 += 2;
-      console.log(`userInput2: ${userInput2}`);
-    } 
-    else if (!isNaN(userInput1)) {
-      userInput1.toString;
-      userInput1 += 2;
-      console.log(`userInput1: ${userInput1}`);
-      return parseInt(userInput1);
-      
-    } 
-    else {
-      userInput1 += 2;
-      console.log(`userInput1: ${userInput1}`);
-    }
-});
+numbers.zero.addEventListener('click', () => handleNumberPress('0'));
+numbers.one.addEventListener('click', () => handleNumberPress('1'));
+numbers.two.addEventListener('click', () => handleNumberPress('2'));
+numbers.three.addEventListener('click', () => handleNumberPress('3'));
+numbers.four.addEventListener('click', () => handleNumberPress('4'));
+numbers.five.addEventListener('click', () => handleNumberPress('5'));
+numbers.six.addEventListener('click', () => handleNumberPress('6'));
+numbers.seven.addEventListener('click', () => handleNumberPress('7'));
+numbers.eight.addEventListener('click', () => handleNumberPress('8'));
+numbers.nine.addEventListener('click', () => handleNumberPress('9'));
 
-const pressThree = three.addEventListener("click", () => {
-    output.innerText = 3;
-    runningTotal += 3;
-    console.log(`runningTotal: ${runningTotal}`);
-    
-    if (mathOperator !== "") {
-      userInput2 += 3;
-      console.log(`userInput2: ${userInput2}`);
-    } 
-    else if (!isNaN(userInput1)) {
-      userInput1.toString;
-      userInput1 += 3;
-      console.log(`userInput1: ${userInput1}`);
-      return parseInt(userInput1);
-      
-    } 
-    else {
-      userInput1 += 3;
-      console.log(`userInput1: ${userInput1}`);
-    }
-});
-const pressPlus = plus.addEventListener("click", () => {
-    output.innerText = "+";
-     mathOperator = "+";
-     console.log(`${userInput1} + `)
-});
-const pressMultiply = multiply.addEventListener("click", () => {
-    output.innerText = "*";
-     mathOperator = "*";
-     console.log(`${userInput1} * `)
-});
-const pressMinus = minus.addEventListener("click", () => {
-    output.innerText = "-";
-     mathOperator = "-";
-     console.log(`${userInput1} - `)
-});
-const pressDivide = divide.addEventListener("click", () => {
-    output.innerText = "/";
-     mathOperator = "/";
-     console.log(`${userInput1} / `)
-});
-const pressDecimal = point.addEventListener("click", () => {
+operators.plus.addEventListener('click', () => handleOperatorPress('+'));
+operators.minus.addEventListener('click', () => handleOperatorPress('-'));
+operators.multiply.addEventListener('click', () => handleOperatorPress('x'));
+operators.divide.addEventListener('click', () => handleOperatorPress('/'));
+operators.equals.addEventListener('click', handleEquals);
 
-});
-const run = equal.addEventListener("click", () => {
-    switch(mathOperator) {
-        case "+":
-            result = Number(userInput1) + Number(userInput2);
-            console.log(`${userInput1} plus ${userInput2} equals ${result}`);
-            break;
-        case "-":
-            result = Number(userInput1) - Number(userInput2);
-            console.log(`${userInput1} minus ${userInput2} equals ${result}`);
-            break;
-        case "*":
-            result = Number(userInput1) * Number(userInput2);
-            console.log(`${userInput1} times ${userInput2} equals ${result}`);
-            break;
-        case "/":
-            result = Number(userInput1) / Number(userInput2);
-            console.log(`${userInput1} divided by ${userInput2} equals ${result}`)
-            break;
-    }
-    
-    output.innerText = result.toFixed(2);
-});
+clear.addEventListener('click', clearCalculator);
+
+negativeToggle.addEventListener('click', handleNegativeToggle);
 
 
-
-
-
-
-
-
-
-
-// functions UNNECESSARY??
-const addition = (userInput1, userInput2) =>  userInput1 + userInput2;
-const multiplication = (userInput1, userInput2) => userInput1 * userInput2;
-const division = (userInput1, userInput2) => userInput1 / userInput2;
-const subtraction = (userInput1, userInput2) => userInput1 - userInput2;
-const percentage = (userInput1, userInput2) => (100 * userInput1) / userInput2;
-const allowNegativeInput = () => {}; //do I need this at all? 
-
-
-
-/* 
-Calc is adding two numbers if they are pressed before an operator.. 
-*/ 
 
 
